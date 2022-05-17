@@ -1,24 +1,45 @@
-# i18n-proyect
+# i18n
 
-## Project setup
+1. installing
 ```
-npm install
+npm i vue-i18n
 ```
+_version 8.7.0_
 
-### Compiles and hot-reloads for development
+2. main.js
 ```
-npm run serve
-```
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import App from './App.vue';
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Vue.config.productionTip = false;
 
-### Lints and fixes files
-```
-npm run lint
-```
+Vue.use(VueI18n);
+const messages = {
+  en: {
+    message: {
+      hello: 'hello world',
+      bye: 'bye',
+      },
+  },
+  ja: {
+    message: {
+      hello: 'こんにちは、世界',
+    },
+  },
+};
+const i18n = new VueI18n({
+  locale: 'en',
+  fallbackLocale: 'en',
+  silentFallbackWarn: true,
+  messages,
+});
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+new Vue({
+  i18n,
+  render: (h) => h(App),
+}).$mount('#app');
+```
+_use() first_
+_'fallbackLocale' for default messages_
+_'silentFallbackWarn' hide console.log(fallbackLocale)_
